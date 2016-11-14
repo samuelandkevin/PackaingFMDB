@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jh2-Pv-VpA">
+                                <rect key="frame" x="36" y="115" width="100" height="30"/>
+                                <color key="backgroundColor" red="0.40448784434917495" green="0.59744835459960677" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="zQh-MN-uA1"/>
+                                </constraints>
+                                <state key="normal" title="更新动态列表">
+                                    <color key="titleColor" red="0.35594309416393305" green="0.47005120171296633" blue="0.33367563491960739" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="updateDynList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pYD-Ah-agX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpT-Pd-TXn">
+                                <rect key="frame" x="36" y="153" width="100" height="30"/>
+                                <color key="backgroundColor" red="0.40448784430000001" green="0.59744835460000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="删除动态表">
+                                    <color key="titleColor" red="0.35594309419999998" green="0.47005120169999998" blue="0.33367563490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteDynTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LtY-pF-vff"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nSD-Zx-gpH">
+                                <rect key="frame" x="36" y="191" width="100" height="30"/>
+                                <color key="backgroundColor" red="0.40448784430000001" green="0.59744835460000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="查询多条状态">
+                                    <color key="titleColor" red="0.35594309419999998" green="0.47005120169999998" blue="0.33367563490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="queryDynList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3ON-qD-8HF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWy-f1-GMh">
+                                <rect key="frame" x="36" y="229" width="100" height="30"/>
+                                <color key="backgroundColor" red="0.40448784430000001" green="0.59744835460000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="查询动态表">
+                                    <color key="titleColor" red="0.35594309419999998" green="0.47005120169999998" blue="0.33367563490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="queryDynTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X9J-I0-bRY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="201" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hx-Zt-M1m">
+                                <rect key="frame" x="156" y="115" width="130" height="30"/>
+                                <color key="backgroundColor" red="0.40448784430000001" green="0.59744835460000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="更新我的好友列表">
+                                    <color key="titleColor" red="0.35594309419999998" green="0.47005120169999998" blue="0.33367563490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="updateMyFris:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Al2-J5-T8R"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="202" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3s7-Hv-0SK">
+                                <rect key="frame" x="156" y="153" width="130" height="30"/>
+                                <color key="backgroundColor" red="0.40448784430000001" green="0.59744835460000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="删除我的好友表">
+                                    <color key="titleColor" red="0.35594309419999998" green="0.47005120169999998" blue="0.33367563490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteMyFrisTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DBb-G8-wo0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="203" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ocs-5h-Tbp">
+                                <rect key="frame" x="156" y="191" width="130" height="30"/>
+                                <color key="backgroundColor" red="0.40448784430000001" green="0.59744835460000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="查询多个好友">
+                                    <color key="titleColor" red="0.35594309419999998" green="0.47005120169999998" blue="0.33367563490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="queryMyFrisArray:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bfg-Vl-2Vl"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="204" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAj-6C-5zo">
+                                <rect key="frame" x="156" y="229" width="130" height="30"/>
+                                <color key="backgroundColor" red="0.40448784430000001" green="0.59744835460000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="查询我的好友表">
+                                    <color key="titleColor" red="0.35594309419999998" green="0.47005120169999998" blue="0.33367563490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="queryMyFrisTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6xD-xV-Auo"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="动态表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9d-ke-vkk">
+                                <rect key="frame" x="60" y="86" width="52" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.10980392160000001" green="0.61568627450000002" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的好友表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46k-Os-enw">
+                                <rect key="frame" x="178" y="86" width="87" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.10980392160000001" green="0.61568627450000002" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FMDB封装DEMO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvL-fS-5VE">
+                                <rect key="frame" x="103" y="38" width="175" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <color key="textColor" red="0.0" green="0.74901960779999999" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" tag="105" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SHK-6u-MbF">
+                                <rect key="frame" x="36" y="267" width="108" height="30"/>
+                                <color key="backgroundColor" red="0.40448784430000001" green="0.59744835460000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="108" id="g59-vY-gWy"/>
+                                </constraints>
+                                <state key="normal" title="更新某一条动态">
+                                    <color key="titleColor" red="0.35594309419999998" green="0.47005120169999998" blue="0.33367563490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="updateOneDyn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="klf-Xh-Adx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="205" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHa-jt-QzQ">
+                                <rect key="frame" x="156" y="267" width="130" height="30"/>
+                                <color key="backgroundColor" red="0.40448784430000001" green="0.59744835460000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="更新某个好友信息">
+                                    <color key="titleColor" red="0.35594309419999998" green="0.47005120169999998" blue="0.33367563490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="updateOneFri:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OQ3-Ab-baQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="106" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KiJ-V0-E7S">
+                                <rect key="frame" x="36" y="305" width="100" height="30"/>
+                                <color key="backgroundColor" red="0.40448784430000001" green="0.59744835460000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="条件查询动态">
+                                    <color key="titleColor" red="0.35594309419999998" green="0.47005120169999998" blue="0.33367563490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="queryByCondition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TzU-F8-0AU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="107" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMp-3F-5Jc">
+                                <rect key="frame" x="36" y="343" width="100" height="30"/>
+                                <color key="backgroundColor" red="0.40448784430000001" green="0.59744835460000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="模糊查询动态">
+                                    <color key="titleColor" red="0.35594309419999998" green="0.47005120169999998" blue="0.33367563490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="fuzzyQueryDyn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lJz-hm-c0P"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqt-2t-ehj" userLabel="Line">
+                                <rect key="frame" x="148" y="87" width="1" height="287"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="1" id="C0j-yY-c4P"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CjF-ko-aMc" userLabel="result">
+                                <rect key="frame" x="26" y="507" width="323" height="150"/>
+                                <color key="backgroundColor" red="0.80784313730000001" green="0.79607843140000001" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="cn1-7Y-8vw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="PaJ-B9-eFy">
+                                <rect key="frame" x="177" y="572" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Output:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n9a-05-Ept">
+                                <rect key="frame" x="26" y="490" width="49" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" tag="206" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JbN-Us-92v">
+                                <rect key="frame" x="157" y="305" width="129" height="30"/>
+                                <color key="backgroundColor" red="0.40448784430000001" green="0.59744835460000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="条件查询好友">
+                                    <color key="titleColor" red="0.35594309419999998" green="0.47005120169999998" blue="0.33367563490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="queryMyFrisByCondition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9Zy-U0-Rc3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="207" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wum-oF-eco">
+                                <rect key="frame" x="156" y="344" width="131" height="30"/>
+                                <color key="backgroundColor" red="0.40448784430000001" green="0.59744835460000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="模糊查询好友">
+                                    <color key="titleColor" red="0.35594309419999998" green="0.47005120169999998" blue="0.33367563490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="fuzzyQueryMyFris:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dux-BY-aYb"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ocs-5h-Tbp" firstAttribute="centerY" secondItem="nSD-Zx-gpH" secondAttribute="centerY" id="0v0-A9-s9h"/>
+                            <constraint firstItem="dMp-3F-5Jc" firstAttribute="width" secondItem="KiJ-V0-E7S" secondAttribute="width" id="2OY-yU-c9R"/>
+                            <constraint firstItem="46k-Os-enw" firstAttribute="centerX" secondItem="4hx-Zt-M1m" secondAttribute="centerX" id="3cg-YZ-Bbu"/>
+                            <constraint firstItem="bqt-2t-ehj" firstAttribute="top" secondItem="h9d-ke-vkk" secondAttribute="top" constant="1" id="48R-ZC-PN1"/>
+                            <constraint firstItem="GAj-6C-5zo" firstAttribute="width" secondItem="ocs-5h-Tbp" secondAttribute="width" id="609-ie-a2B"/>
+                            <constraint firstItem="bqt-2t-ehj" firstAttribute="bottom" secondItem="dMp-3F-5Jc" secondAttribute="bottom" constant="1" id="63U-o7-2Mh"/>
+                            <constraint firstItem="Jh2-Pv-VpA" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="95" id="6pd-re-Xnp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CjF-ko-aMc" secondAttribute="trailing" constant="10" id="7XA-32-Nu5"/>
+                            <constraint firstItem="dMp-3F-5Jc" firstAttribute="top" secondItem="KiJ-V0-E7S" secondAttribute="bottom" constant="8" id="87h-Ev-r7F"/>
+                            <constraint firstItem="3s7-Hv-0SK" firstAttribute="centerY" secondItem="hpT-Pd-TXn" secondAttribute="centerY" id="8Yn-ob-vkt"/>
+                            <constraint firstItem="bqt-2t-ehj" firstAttribute="leading" secondItem="SHK-6u-MbF" secondAttribute="trailing" constant="4" id="9Kz-WD-jsd"/>
+                            <constraint firstItem="Jh2-Pv-VpA" firstAttribute="top" secondItem="h9d-ke-vkk" secondAttribute="bottom" constant="8" id="9zB-sD-86k"/>
+                            <constraint firstItem="nSD-Zx-gpH" firstAttribute="top" secondItem="hpT-Pd-TXn" secondAttribute="bottom" constant="8" id="Ah1-do-Yj8"/>
+                            <constraint firstItem="nSD-Zx-gpH" firstAttribute="leading" secondItem="hpT-Pd-TXn" secondAttribute="leading" id="CUx-dM-61W"/>
+                            <constraint firstItem="Jh2-Pv-VpA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="DLf-At-KsJ"/>
+                            <constraint firstItem="GAj-6C-5zo" firstAttribute="leading" secondItem="ocs-5h-Tbp" secondAttribute="leading" id="DMd-P3-Z7E"/>
+                            <constraint firstItem="vvL-fS-5VE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="3" id="Exb-vT-M7p"/>
+                            <constraint firstItem="nSD-Zx-gpH" firstAttribute="width" secondItem="hpT-Pd-TXn" secondAttribute="width" id="Jss-X2-4EB"/>
+                            <constraint firstItem="yWy-f1-GMh" firstAttribute="top" secondItem="nSD-Zx-gpH" secondAttribute="bottom" constant="8" id="KA7-rw-Jqm"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="CjF-ko-aMc" secondAttribute="bottom" constant="10" id="NTf-VY-ZoE"/>
+                            <constraint firstItem="GAj-6C-5zo" firstAttribute="centerY" secondItem="yWy-f1-GMh" secondAttribute="centerY" id="OTU-8n-xRY"/>
+                            <constraint firstItem="ocs-5h-Tbp" firstAttribute="width" secondItem="3s7-Hv-0SK" secondAttribute="width" id="Obg-aZ-TH2"/>
+                            <constraint firstItem="n9a-05-Ept" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="P7O-43-vn9"/>
+                            <constraint firstItem="CjF-ko-aMc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="QcZ-x1-0MP"/>
+                            <constraint firstItem="CjF-ko-aMc" firstAttribute="top" secondItem="n9a-05-Ept" secondAttribute="bottom" id="VC3-4c-zwu"/>
+                            <constraint firstItem="4hx-Zt-M1m" firstAttribute="width" secondItem="Jh2-Pv-VpA" secondAttribute="width" constant="30" id="VeN-E2-pOH"/>
+                            <constraint firstItem="PaJ-B9-eFy" firstAttribute="centerY" secondItem="CjF-ko-aMc" secondAttribute="centerY" id="WK3-Xr-yc1"/>
+                            <constraint firstItem="KiJ-V0-E7S" firstAttribute="width" secondItem="yWy-f1-GMh" secondAttribute="width" id="Wvd-0J-baB"/>
+                            <constraint firstItem="KiJ-V0-E7S" firstAttribute="leading" secondItem="SHK-6u-MbF" secondAttribute="leading" id="YZ8-Of-xWo"/>
+                            <constraint firstItem="JbN-Us-92v" firstAttribute="width" secondItem="bHa-jt-QzQ" secondAttribute="width" constant="-1" id="YbJ-GX-9EG"/>
+                            <constraint firstItem="yWy-f1-GMh" firstAttribute="width" secondItem="nSD-Zx-gpH" secondAttribute="width" id="Z3v-Yd-1O1"/>
+                            <constraint firstItem="3s7-Hv-0SK" firstAttribute="width" secondItem="4hx-Zt-M1m" secondAttribute="width" id="ZJZ-vn-0MN"/>
+                            <constraint firstItem="h9d-ke-vkk" firstAttribute="centerX" secondItem="Jh2-Pv-VpA" secondAttribute="centerX" id="eSw-Sm-Yd8"/>
+                            <constraint firstItem="hpT-Pd-TXn" firstAttribute="width" secondItem="Jh2-Pv-VpA" secondAttribute="width" id="gQ3-lr-oog"/>
+                            <constraint firstItem="yWy-f1-GMh" firstAttribute="leading" secondItem="nSD-Zx-gpH" secondAttribute="leading" id="j2Y-92-ILj"/>
+                            <constraint firstItem="wum-oF-eco" firstAttribute="leading" secondItem="JbN-Us-92v" secondAttribute="leading" constant="-1" id="jTG-Dw-mtp"/>
+                            <constraint firstItem="dMp-3F-5Jc" firstAttribute="leading" secondItem="KiJ-V0-E7S" secondAttribute="leading" id="n33-kv-O8r"/>
+                            <constraint firstItem="SHK-6u-MbF" firstAttribute="leading" secondItem="yWy-f1-GMh" secondAttribute="leading" id="nCH-px-rPI"/>
+                            <constraint firstItem="SHK-6u-MbF" firstAttribute="top" secondItem="yWy-f1-GMh" secondAttribute="bottom" constant="8" id="nar-nS-WlQ"/>
+                            <constraint firstItem="4hx-Zt-M1m" firstAttribute="centerY" secondItem="Jh2-Pv-VpA" secondAttribute="centerY" id="o1R-TK-JOQ"/>
+                            <constraint firstItem="vvL-fS-5VE" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="18" id="oCS-Lp-MHZ"/>
+                            <constraint firstItem="bHa-jt-QzQ" firstAttribute="width" secondItem="GAj-6C-5zo" secondAttribute="width" id="oNO-1i-0V5"/>
+                            <constraint firstItem="hpT-Pd-TXn" firstAttribute="top" secondItem="Jh2-Pv-VpA" secondAttribute="bottom" constant="8" id="ofv-3d-YzF"/>
+                            <constraint firstItem="bHa-jt-QzQ" firstAttribute="centerY" secondItem="SHK-6u-MbF" secondAttribute="centerY" id="p1d-Rh-6mB"/>
+                            <constraint firstItem="bHa-jt-QzQ" firstAttribute="leading" secondItem="GAj-6C-5zo" secondAttribute="leading" id="q7P-tz-eYC"/>
+                            <constraint firstItem="3s7-Hv-0SK" firstAttribute="leading" secondItem="4hx-Zt-M1m" secondAttribute="leading" id="rST-9G-yvb"/>
+                            <constraint firstItem="4hx-Zt-M1m" firstAttribute="top" secondItem="46k-Os-enw" secondAttribute="bottom" constant="8" id="rT8-j3-UX9"/>
+                            <constraint firstItem="JbN-Us-92v" firstAttribute="centerY" secondItem="KiJ-V0-E7S" secondAttribute="centerY" id="sJp-mD-HQr"/>
+                            <constraint firstItem="wum-oF-eco" firstAttribute="width" secondItem="JbN-Us-92v" secondAttribute="width" constant="2" id="ux9-KM-smP"/>
+                            <constraint firstItem="ocs-5h-Tbp" firstAttribute="leading" secondItem="3s7-Hv-0SK" secondAttribute="leading" id="vXX-wh-iTd"/>
+                            <constraint firstItem="PaJ-B9-eFy" firstAttribute="centerX" secondItem="CjF-ko-aMc" secondAttribute="centerX" id="wF8-3k-IYA"/>
+                            <constraint firstItem="hpT-Pd-TXn" firstAttribute="leading" secondItem="Jh2-Pv-VpA" secondAttribute="leading" id="wUv-dU-Qan"/>
+                            <constraint firstItem="wum-oF-eco" firstAttribute="centerY" secondItem="dMp-3F-5Jc" secondAttribute="centerY" constant="1" id="wvB-j9-D4G"/>
+                            <constraint firstItem="JbN-Us-92v" firstAttribute="leading" secondItem="GAj-6C-5zo" secondAttribute="leading" constant="1" id="xSw-FX-hGF"/>
+                            <constraint firstItem="KiJ-V0-E7S" firstAttribute="top" secondItem="SHK-6u-MbF" secondAttribute="bottom" constant="8" id="xuS-zw-765"/>
+                            <constraint firstItem="4hx-Zt-M1m" firstAttribute="leading" secondItem="Jh2-Pv-VpA" secondAttribute="trailing" constant="20" id="yEU-1R-65P"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityView" destination="PaJ-B9-eFy" id="kLy-MQ-tJN"/>
+                        <outlet property="lbResult" destination="CjF-ko-aMc" id="95y-Lq-iAQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="87.706146926536732"/>
+        </scene>
+    </scenes>
+</document>

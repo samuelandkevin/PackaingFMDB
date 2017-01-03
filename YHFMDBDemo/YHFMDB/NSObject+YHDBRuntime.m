@@ -1,6 +1,6 @@
 //
 //  NSObject+Runtime.m
-//  
+//
 //
 //  Created by YHIOS002 on 16/11/9.
 //  Copyright © 2016年 YHSoft. All rights reserved.
@@ -22,7 +22,7 @@ NSString *const YHDB_PrimaryKey = @"id";
 /**
  * 实现该方法，则必须实现：yh_replacedKeyFromPropertyName
  * 设置主键:能够唯一标示该模型的属性
- * 
+ *
  */
 + (NSString *)yh_primaryKey{
     return nil;
@@ -77,7 +77,7 @@ NSString *const YHDB_PrimaryKey = @"id";
 
 /**
  *  将属性是一个模型对象:字典再根据属性名获取value作为字段名
-    示例：@{@"tea":[NSString stringWithFormat:@"tea%@",YHDB_AppendingID]}；
+ 示例：@{@"tea":[NSString stringWithFormat:@"tea%@",YHDB_AppendingID]}；
  *
  */
 + (NSDictionary*)yh_replacedKeyFromDictionaryWhenPropertyIsObject{
@@ -111,6 +111,29 @@ NSString *const YHDB_PrimaryKey = @"id";
 }
 
 #pragma mark -- SQL
++ (NSString *)yh_sqlForCreatTable:(NSString *)table primaryKey:(NSString *)primaryKey{
+    return [self yh_sqlForCreateTable:table primaryKey:primaryKey extraKeyValues:nil];
+}
+
++ (NSString *)yh_sqlForCreateTable:(NSString *)table primaryKey:(NSString *)primaryKey  extraKeyValues:(NSArray <YHDBRuntimeIvar *> *)extraKeyValues{
+    
+    __block NSString *initSql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (",table];
+    [self yh_objectIvar_nameAndIvar_typeWithOption:^(YHDBRuntimeIvar *ivar) {
+        [self yh_replaceKeyWithIvarModel:ivar option:^(YHDBRuntimeIvar *ivar) {
+            initSql = [initSql stringByAppendingString:[self yh_sqlWithExtraKeyValue:@[ivar] primaryKey:primaryKey]];
+        }];
+        
+    }];
+    if (extraKeyValues) {
+        initSql = [initSql stringByAppendingString:[self yh_sqlWithExtraKeyValue:extraKeyValues primaryKey:primaryKey]];
+    }
+    initSql = [initSql substringToIndex:initSql.length-1];
+    initSql = [initSql stringByAppendingString:@");"];
+    return initSql;
+    
+}
+
+
 + (NSString *)yh_sqlForCreateTableWithPrimaryKey:(NSString *)primaryKey {
     return [self yh_sqlForCreateTableWithPrimaryKey:primaryKey extraKeyValues:nil];
 }
@@ -130,7 +153,7 @@ NSString *const YHDB_PrimaryKey = @"id";
     initSql = [initSql substringToIndex:initSql.length-1];
     initSql = [initSql stringByAppendingString:@");"];
     return initSql;
-
+    
 }
 
 + (NSString *)yh_sqlWithExtraKeyValue:(NSArray *)extraKeyValues primaryKey:(NSString *)primaryKey{
@@ -160,33 +183,40 @@ NSString *const YHDB_PrimaryKey = @"id";
 }
 
 //查询语句
-+ (NSString *)yh_sqlForExcuteWithPrimaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo value:(id )value{
-
++ (NSString *)yh_sqlForExcuteWithTable:(NSString *)table primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo value:(id )value{
+    
+    NSString *tableName = nil;
+    if (!table) {
+        tableName = NSStringFromClass(self);
+    }else{
+        tableName = table;
+    }
+    
     NSString *sql  = @"";
     id priKeyValue = value;
     if (priKeyValue) {
-      sql = [NSString stringWithFormat:@"select * from %@ where %@ = %@",NSStringFromClass(self),primaryKey,priKeyValue];
+        sql = [NSString stringWithFormat:@"select * from %@ where %@ = %@",tableName,primaryKey,priKeyValue];
     }else{
         sql = [NSString stringWithFormat:@"select * from %@ where",NSStringFromClass(self)];
     }
     
     //拼接条件查询参数
     for (int i =0 ; i< userInfo.allKeys.count; i++) {
-         NSString *key = userInfo.allKeys[i];
-         id value =  [userInfo valueForKey:key];
+        NSString *key = userInfo.allKeys[i];
+        id value =  [userInfo valueForKey:key];
         NSString *sql2 = nil;
         if([value isKindOfClass:[NSString class]]){
             sql2 = [NSString stringWithFormat:@"%@ = '%@'",key,value];
         }else{
             sql2 = [NSString stringWithFormat:@"%@ = %@",key,value];
         }
-      
+        
         if (userInfo.allKeys.count == 1) {
             //只有一个key
             if (priKeyValue) {
-                 sql = [sql stringByAppendingString:[NSString stringWithFormat:@" and %@ ",sql2]];
+                sql = [sql stringByAppendingString:[NSString stringWithFormat:@" and %@ ",sql2]];
             }else{
-                 sql = [sql stringByAppendingString:[NSString stringWithFormat:@" %@ ",sql2]];
+                sql = [sql stringByAppendingString:[NSString stringWithFormat:@" %@ ",sql2]];
             }
             
         }else{
@@ -200,7 +230,7 @@ NSString *const YHDB_PrimaryKey = @"id";
                 }
             }
         }
-       
+        
     }
     
     

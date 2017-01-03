@@ -92,12 +92,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YHFMDBDemo/YHFMDB/FMDatabase+YHDatabase.m"
-            timestampString = "500795957.41884"
+            timestampString = "505097483.56024"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "469"
-            endingLineNumber = "469"
-            landmarkName = "-yh_excuteDatasWithModel:primaryKey:userInfo:fuzzyUserInfo:option:"
+            startingLineNumber = "495"
+            endingLineNumber = "495"
+            landmarkName = "-yh_excuteDatasWithTable:model:primaryKey:userInfo:fuzzyUserInfo:option:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

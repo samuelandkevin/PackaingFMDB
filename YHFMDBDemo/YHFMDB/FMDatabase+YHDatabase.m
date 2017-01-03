@@ -1,6 +1,6 @@
 //
 //  FMDatabase+YHDatabase.m
-//  
+//
 //
 //  Created by YHIOS002 on 16/11/8.
 //  Copyright © 2016年 YHSoft. All rights reserved.
@@ -14,25 +14,25 @@
 
 
 #pragma mark -- 无PrimaryKey
-- (void )yh_saveDataWithModel:(id )model userInfo:(NSDictionary *)userInfo option:(YHSaveOption )option{
-    [self yh_saveDataWithModel:model  primaryKey:YHDB_PrimaryKey userInfo:userInfo option:option];
+- (void )yh_saveDataWithTable:(NSString *)table model:(id )model userInfo:(NSDictionary *)userInfo option:(YHSaveOption )option{
+    [self yh_saveDataWithTable:table model:model  primaryKey:YHDB_PrimaryKey userInfo:userInfo option:option];
 }
 
-- (void)yh_deleteDataWithModel:(id )model userInfo:(NSDictionary *)userInfo option:(YHDeleteOption )option{
-    [self yh_deleteDataWithModel:model primaryKey:YHDB_PrimaryKey userInfo:userInfo option:option];
+- (void)yh_deleteDataWithTable:(NSString *)table model:(id )model userInfo:(NSDictionary *)userInfo option:(YHDeleteOption )option{
+    [self yh_deleteDataWithTable:table model:model primaryKey:YHDB_PrimaryKey userInfo:userInfo option:option];
 }
 
-- (id )yh_excuteDataWithModel:(id )model userInfo:(NSDictionary *)userInfo  fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo option:(YHExcuteOption )option{
-    return [self yh_excuteDataWithModel:model primaryKey:YHDB_PrimaryKey userInfo:userInfo fuzzyUserInfo:fuzzyUserInfo option:option];
+- (id )yh_excuteDataWithTable:(NSString *)table model:(id )model userInfo:(NSDictionary *)userInfo  fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo option:(YHExcuteOption )option{
+    return [self yh_excuteDataWithTable:table model:model primaryKey:YHDB_PrimaryKey userInfo:userInfo fuzzyUserInfo:fuzzyUserInfo option:option];
 }
 
 //查询某种所有的模型数据
-- (void)yh_excuteDatasWithModel:(id )model  userInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo option:(YHAllModelsOption )option{
-    [self yh_excuteDatasWithModel:model primaryKey:YHDB_PrimaryKey userInfo:userInfo fuzzyUserInfo:fuzzyUserInfo option:option];
+- (void)yh_excuteDatasWithTable:(NSString *)table model:(id )model  userInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo option:(YHAllModelsOption )option{
+    [self yh_excuteDatasWithTable:table model:model primaryKey:YHDB_PrimaryKey userInfo:userInfo fuzzyUserInfo:fuzzyUserInfo option:option];
 }
 
 #pragma mark -- 有PrimaryKey
-- (void)yh_exsitInDatabaseForModel:(id )model primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo option:(YHExistExcuteOption )option{
+- (void)yh_exsitInDatabaseWithTable:(NSString *)table model:(id )model primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo option:(YHExistExcuteOption )option{
     if (!primaryKey) primaryKey = YHDB_PrimaryKey;
     
     id primary_keyValue = nil;
@@ -42,7 +42,15 @@
     }else{
         primary_keyValue = [model valueForKey:primaryKey];
     }
-    FMResultSet *set = [self executeQuery:[NSString stringWithFormat:@"select * from %@ where %@ = %@ ;",NSStringFromClass([model class]),primaryKey,primary_keyValue]];
+    
+    NSString *tableName = nil;
+    if (!table) {
+        tableName = NSStringFromClass([model class]);
+    }else{
+        tableName = table;
+    }
+    
+    FMResultSet *set = [self executeQuery:[NSString stringWithFormat:@"select * from %@ where %@ = %@ ;",tableName,primaryKey,primary_keyValue]];
     if (option) {
         if ([set next]) {
             option(YES);
@@ -53,8 +61,14 @@
     }
 }
 
-- (void)yh_insertDataWithModel:(id )model  primaryKey:(NSString *)primaryKey  option:(YHInsertOption )option {
-    __block NSString *sql1 = [NSString stringWithFormat:@"insert into %@ (",NSStringFromClass([model class])];
+- (void)yh_insertDataWithTable:(NSString *)table model:(id )model  primaryKey:(NSString *)primaryKey  option:(YHInsertOption )option {
+    NSString *tableName = nil;
+    if (!table) {
+        tableName = NSStringFromClass([model class]);
+    }else{
+        tableName = table;
+    }
+    __block NSString *sql1 = [NSString stringWithFormat:@"insert into %@ (",tableName];
     __block NSString *sql2 = [NSString stringWithFormat:@")  values  ("];
     //获取模型的属性名和属性类型
     [[model class] yh_objectIvar_nameAndIvar_typeWithOption:^(YHDBRuntimeIvar *ivar) {
@@ -70,7 +84,7 @@
                     // 递归调用
                     if (value) {
                         //[self yh_insertDataWithModel:value primaryKey:YHDB_PrimaryKey option:nil];
-                        [self yh_saveDataWithModel:value primaryKey:YHDB_PrimaryKey userInfo:nil option:nil];
+                        [self yh_saveDataWithTable:table model:value primaryKey:YHDB_PrimaryKey userInfo:nil option:nil];
                     }
                     //拼接外键
                     
@@ -80,7 +94,7 @@
                     ivar_type = RuntimeObjectIvarTypeOther;
                     
                     if ([value isKindOfClass:[NSString class]]) {
-                         sql2 = [sql2 stringByAppendingString:[NSString stringWithFormat:@"'%@',",value]];
+                        sql2 = [sql2 stringByAppendingString:[NSString stringWithFormat:@"'%@',",value]];
                     }else{
                         sql2 = [sql2 stringByAppendingString:[NSString stringWithFormat:@"%ld,",[value longValue]]];
                     }
@@ -99,7 +113,7 @@
                         [arrm addObject:[model mj_keyValues]];
                     }
                     
-                   
+                    
                 }
                 ivar_type = RuntimeObjectIvarTypeArray;
                 sql2 = [sql2 stringByAppendingString:@"'"];
@@ -139,7 +153,7 @@
             sql2 = [sql2 stringByAppendingString:[NSString stringWithFormat:@"%@",arrm.mj_JSONString]];
             sql2 = [sql2 stringByAppendingString:@"',"];
         }else if (ivar_type == RuntimeObjectIvarTypeData){
-
+            
             NSString *dataStr = @"";
             id data = [model valueForKey:ivar_name];
             if ([NSStringFromClass([data class]) isEqualToString:@"NSData"]) {
@@ -147,9 +161,9 @@
             }
             else{
                 float num =  [data floatValue];
-//                NSLog(@"%f",num);
+                //                NSLog(@"%f",num);
                 dataStr = [NSString stringWithFormat:@"%f",num];
-             
+                
             }
             sql2 = [sql2 stringByAppendingString:[NSString stringWithFormat:@"%@,",dataStr]];
             
@@ -177,10 +191,17 @@
     }
 }
 
-- (void)yh_updateDataWithModel:(id) model  primaryKey:(NSString *)primaryKey option:(YHUpdateOption )option{
-    NSString *table = NSStringFromClass([model class]);
+- (void)yh_updateDataWithTable:(NSString *)table model:(id) model  primaryKey:(NSString *)primaryKey option:(YHUpdateOption )option{
+    
+    NSString *tableName = nil;
+    if (!table) {
+        tableName = NSStringFromClass([model class]);
+    }else{
+        tableName = table;
+    }
+    
     NSString *model_primaryKey = [primaryKey copy];
-    __block NSString *initSql = [NSString stringWithFormat:@"update %@ set ",table];;
+    __block NSString *initSql = [NSString stringWithFormat:@"update %@ set ",tableName];;
     if ([[model class] yh_primaryKey]) {
         model_primaryKey = [[model class] yh_primaryKey];
     }else{
@@ -253,8 +274,8 @@
                     NSString *nameForPropertyModel = [ivar_name substringToIndex:ivar_name.length - YHDB_AppendingID.length];
                     value = [model valueForKey:nameForPropertyModel];
                     if (value) {
-//                        [self yh_updateDataWithModel:value primaryKey:primaryKey option:nil];
-                        [self yh_saveDataWithModel:value primaryKey:YHDB_PrimaryKey userInfo:nil option:nil];
+                        //                        [self yh_updateDataWithModel:value primaryKey:primaryKey option:nil];
+                        [self yh_saveDataWithTable:table model:value primaryKey:YHDB_PrimaryKey userInfo:nil option:nil];
                     }
                     
                     if ([primaryKey isEqualToString:YHDB_PrimaryKey] ) {
@@ -273,42 +294,42 @@
     initSql = [initSql stringByAppendingString:sql2];
     BOOL  ok = [self executeUpdate:initSql];
     if (option) option(ok);
-
+    
 }
 
-- (void )yh_saveDataWithModel:(id )model  primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo option:(YHSaveOption )option{
-    [self yh_exsitInDatabaseForModel:model primaryKey:primaryKey userInfo:userInfo option:^(BOOL exist) {
+- (void )yh_saveDataWithTable:(NSString *)table model:(id )model  primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo option:(YHSaveOption )option{
+    [self yh_exsitInDatabaseWithTable:table model:model primaryKey:primaryKey userInfo:userInfo option:^(BOOL exist) {
         if (exist) {//update
-            [self yh_updateDataWithModel:model primaryKey:primaryKey option:^(BOOL update) {
+            [self yh_updateDataWithTable:table model:model primaryKey:primaryKey option:^(BOOL update) {
                 if (option) option(update);
             }];
         }else {//插入
-            [self yh_insertDataWithModel:model primaryKey:primaryKey option:^(BOOL insert) {
+            [self yh_insertDataWithTable:table model:model primaryKey:primaryKey option:^(BOOL insert) {
                 if (option) option(insert);
             }];
         }
     }];
 }
-- (void)yh_deleteDataWithModel:(id )model  primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo option:(YHDeleteOption )option{
+- (void)yh_deleteDataWithTable:(NSString *)table model:(id )model  primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo option:(YHDeleteOption )option{
     
-    model = [self yh_excuteDataWithModel:model userInfo:userInfo fuzzyUserInfo:nil option:nil];
+    model = [self yh_excuteDataWithTable:table model:model userInfo:userInfo fuzzyUserInfo:nil option:nil];
     if (model == nil) return;
     
-    NSString *table = NSStringFromClass([model class]);
+    //    NSString *table = NSStringFromClass([model class]);
     id value = nil;//model的主键值
     if ([[model class] yh_primaryKey].length > 0) {
         value = [model valueForKey:[[model class] yh_primaryKey]];
     }else{
-     value = [model valueForKey:primaryKey];
+        value = [model valueForKey:primaryKey];
     }
     if (value <= 0) return;
-
+    
     
     /** 获取所有模型属性名和属性类型 */
     [[model class] yh_objectIvar_nameAndIvar_typeWithOption:^(YHDBRuntimeIvar *ivar) {
         
         [[model class] yh_replaceKeyWithIvarModel:ivar option:^(YHDBRuntimeIvar *ivar) {
-          //  NSString *ivar_name = ivar.name;
+            //  NSString *ivar_name = ivar.name;
             id valueOfIvarName = nil;
             if ([ivar.name hasSuffix:YHDB_AppendingID]) {
                 NSString *foreignKey = [ivar.name substringToIndex:ivar.name.length - YHDB_AppendingID.length];
@@ -316,7 +337,7 @@
                 id classOfForeignKey = [[model class] yh_getClassForKeyIsObject][foreignKey];
                 if (classOfForeignKey != nil && valueOfIvarName) {
                     //创建实例对象
-//                    id instanceOfForeignKey = [[classOfForeignKey alloc]init];
+                    //                    id instanceOfForeignKey = [[classOfForeignKey alloc]init];
                     id instanceOfForeignKey = valueOfIvarName;
                     // instanceOfForeignKey的主键
                     id primaryKeyOf_instanceOfForeignKey = nil;
@@ -326,17 +347,17 @@
                         primaryKeyOf_instanceOfForeignKey = YHDB_PrimaryKey;
                     }
                     //设置模型的主键值
-                   // [instanceOfForeignKey setValue:valueOfIvarName forKey:primaryKeyOf_instanceOfForeignKey];
+                    // [instanceOfForeignKey setValue:valueOfIvarName forKey:primaryKeyOf_instanceOfForeignKey];
                     /** 在数据库查询该模型 */
-                    id instanceInDatabase = [self yh_excuteDataWithModel:instanceOfForeignKey primaryKey:YHDB_PrimaryKey userInfo:userInfo fuzzyUserInfo:nil option:nil];
+                    id instanceInDatabase = [self yh_excuteDataWithTable:table model:instanceOfForeignKey primaryKey:YHDB_PrimaryKey userInfo:userInfo fuzzyUserInfo:nil option:nil];
                     if (instanceInDatabase) {
-                        [self yh_deleteDataWithModel:instanceInDatabase primaryKey:YHDB_PrimaryKey userInfo:userInfo option:nil];
+                        [self yh_deleteDataWithTable:table model:instanceInDatabase primaryKey:YHDB_PrimaryKey userInfo:userInfo option:nil];
                     }
                 }
             }else{
                 
             }
-
+            
         }];
         
     }];
@@ -354,9 +375,9 @@
     
 }
 #pragma mark -- excuteDataWithModel
-- (id )yh_excuteDataWithModel:(id )fmodel  primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo option:(YHExcuteOption )option{
+- (id )yh_excuteDataWithTable:(NSString *)table model:(id )fmodel  primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo option:(YHExcuteOption )option{
     NSString *modelPrimaryKey = nil;
-
+    
     if ([[fmodel class] yh_primaryKey]) {
         modelPrimaryKey = [[fmodel class] yh_primaryKey];
     }else{
@@ -367,18 +388,18 @@
     id fvalue = [fmodel valueForKey:modelPrimaryKey];
     id model = [[[fmodel class]alloc ]init];
     [model setValue:fvalue forKey:modelPrimaryKey];
-   
-    NSString * sql = [[model class ] yh_sqlForExcuteWithPrimaryKey:primaryKey userInfo:userInfo fuzzyUserInfo:fuzzyUserInfo value:[fmodel valueForKey:modelPrimaryKey]];
     
-
+    NSString * sql = [[model class ] yh_sqlForExcuteWithTable:table primaryKey:primaryKey userInfo:userInfo fuzzyUserInfo:fuzzyUserInfo value:[fmodel valueForKey:modelPrimaryKey]];
+    
+    
     FMResultSet *set= [self executeQuery:sql];
-
-
+    
+    
     if (![set next]) {
         model = nil;
     }
     else{
-            [[model class ] yh_objectIvar_nameAndIvar_typeWithOption:^(YHDBRuntimeIvar *ivar) {
+        [[model class ] yh_objectIvar_nameAndIvar_typeWithOption:^(YHDBRuntimeIvar *ivar) {
             
             [[model class] yh_replaceKeyWithIvarModel:ivar option:^(YHDBRuntimeIvar *ivar) {
                 
@@ -393,9 +414,9 @@
                     }
                     [model setValue:arrM forKey:ivar.name];
                 }else if(ivar.type == RuntimeObjectIvarTypeData){
-                   
+                    
                     if ([ivar.typeName isEqualToString:@"B"]) {
-                      BOOL value = [set boolForColumn:ivar.name];
+                        BOOL value = [set boolForColumn:ivar.name];
                         [model setValue:@(value) forKey:ivar.name];
                     }else{
                         NSString *dataStr = [set stringForColumn:ivar.name];
@@ -404,7 +425,7 @@
                     }
                     
                     
-                   
+                    
                 }else if(ivar.type == RuntimeObjectIvarTypeImage){
                     NSString *imageName = [set stringForColumn:ivar.name];
                     UIImage *image = [UIImage imageWithContentsOfFile:[self fullPathWithFileName:imageName]];
@@ -417,8 +438,8 @@
                         NSString *key = [[model class] yh_primaryKey];
                         [model setValue:[set stringForColumn:ivar.name] forKey:key];
                     }else{
-
-                            [model setValue:[set stringForColumn:ivar.name] forKey:ivar.name];
+                        
+                        [model setValue:[set stringForColumn:ivar.name] forKey:ivar.name];
                     }
                     
                     
@@ -431,7 +452,7 @@
                             id subModel = [[destClass alloc]init];
                             //如果主键有替换
                             [subModel setValue:setValue forKey:[[subModel class] yh_primaryKey]];
-                            id retModel = [self yh_excuteDataWithModel:subModel primaryKey:primaryKey userInfo:nil fuzzyUserInfo:nil option:nil];
+                            id retModel = [self yh_excuteDataWithTable:table model:subModel primaryKey:primaryKey userInfo:nil fuzzyUserInfo:nil option:nil];
                             [model setValue:retModel forKey:realName];
                         }
                     }else{//基本数据类型：long
@@ -451,10 +472,15 @@
     return model;
 }
 #pragma mark -- 查询所有
-- (void)yh_excuteDatasWithModel:(id )model  primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo option:(YHAllModelsOption )option{
+- (void)yh_excuteDatasWithTable:(NSString *)table model:(id )model  primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo option:(YHAllModelsOption )option{
     NSString *modelPrimaryKey = [[model class] yh_primaryKey];
-    NSString *table = NSStringFromClass([model class]);
-    NSString *sql = [NSString stringWithFormat:@"select * from %@",table];
+    NSString *tableName = nil;
+    if (!table) {
+        tableName = NSStringFromClass([model class]);
+    }else{
+        tableName = table;
+    }
+    NSString *sql = [NSString stringWithFormat:@"select * from %@",tableName];
     NSMutableArray *arr = [NSMutableArray array];
     FMResultSet *set = [self executeQuery:sql];
     while ([set next]) {
@@ -465,7 +491,7 @@
         }else{
             [submodel setValue:value forKey:primaryKey];
         }
-        submodel = [self yh_excuteDataWithModel:submodel primaryKey:primaryKey userInfo:userInfo fuzzyUserInfo:fuzzyUserInfo option:nil];
+        submodel = [self yh_excuteDataWithTable:table model:submodel primaryKey:primaryKey userInfo:userInfo fuzzyUserInfo:fuzzyUserInfo option:nil];
         if(submodel){
             [arr addObject:submodel];
         }

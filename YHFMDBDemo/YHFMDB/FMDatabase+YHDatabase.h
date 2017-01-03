@@ -1,6 +1,6 @@
 //
 //  FMDatabase+YHDatabase.h
-//  
+//
 //
 //  Created by YHIOS002 on 16/11/8.
 //  Copyright © 2016年 YHSoft. All rights reserved.
@@ -18,24 +18,24 @@ typedef void(^YHAllModelsOption)(NSMutableArray *models);
 @interface FMDatabase (YHDatabase)
 
 /** 保存一个模型 */
-- (void )yh_saveDataWithModel:(id )model userInfo:(NSDictionary *)userInfo option:(YHSaveOption )option;
+- (void )yh_saveDataWithTable:(NSString *)table model:(id )model userInfo:(NSDictionary *)userInfo option:(YHSaveOption )option;
 /** 删除一个模型 */
-- (void)yh_deleteDataWithModel:(id )model userInfo:(NSDictionary *)userInfo option:(YHDeleteOption )option;
+- (void)yh_deleteDataWithTable:(NSString *)table model:(id )model userInfo:(NSDictionary *)userInfo option:(YHDeleteOption )option;
 /** 查询某个模型数据 */
-- (id )yh_excuteDataWithModel:(id )model  userInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo option:(YHExcuteOption )option;
+- (id )yh_excuteDataWithTable:(NSString *)table model:(id )model  userInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo option:(YHExcuteOption )option;
 /** 查询某种所有的模型数据 */
-- (void)yh_excuteDatasWithModel:(id )model userInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo option:(YHAllModelsOption )option;
+- (void)yh_excuteDatasWithTable:(NSString *)table model:(id )model userInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo option:(YHAllModelsOption )option;
 
 
 #pragma mark -- PrimaryKey
 /** 保存一个模型 */
-- (void )yh_saveDataWithModel:(id )model  primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo option:(YHSaveOption )option;
+- (void )yh_saveDataWithTable:(NSString *)table model:(id )model  primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo option:(YHSaveOption )option;
 /** 删除一个模型 */
-- (void)yh_deleteDataWithModel:(id )model  primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo option:(YHDeleteOption )option;
+- (void)yh_deleteDataWithTable:(NSString *)table model:(id )model  primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo option:(YHDeleteOption )option;
 /** 查询某个模型数据 */
-- (id )yh_excuteDataWithModel:(id )model  primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo option:(YHExcuteOption )option;
+- (id )yh_excuteDataWithTable:(NSString *)table model:(id )model  primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo option:(YHExcuteOption )option;
 /** 查询某种所有的模型数据 */
-- (void)yh_excuteDatasWithModel:(id )model  primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo option:(YHAllModelsOption )option;
+- (void)yh_excuteDatasWithTable:(NSString *)table model:(id )model  primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo option:(YHAllModelsOption )option;
 
 
 #pragma mark -- Method

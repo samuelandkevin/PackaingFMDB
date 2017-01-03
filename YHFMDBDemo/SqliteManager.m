@@ -99,7 +99,7 @@
         
         [self.dbQueue inDatabase:^(FMDatabase *db) {
             /** 存储:会自动调用insert或者update，不需要担心重复插入数据 */
-            [db yh_saveDataWithModel:model userInfo:nil option:^(BOOL save) {
+            [db yh_saveDataWithTable:nil model:model userInfo:nil option:^(BOOL save) {
                 complete(save,nil);
             }];
             
@@ -111,7 +111,7 @@
 - (void)updateaDyn:(YHWorkGroup*)aDyn complete:(void (^)(BOOL success,id obj))complete{
     [self.dbQueue inDatabase:^(FMDatabase *db) {
         /** 存储:会自动调用insert或者update，不需要担心重复插入数据 */
-        [db yh_saveDataWithModel:aDyn userInfo:nil option:^(BOOL save) {
+        [db yh_saveDataWithTable:nil model:aDyn userInfo:nil option:^(BOOL save) {
             complete(save,nil);
         }];
         
@@ -127,7 +127,7 @@
 - (void)queryDynTableWithUserInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo complete:(void (^)(BOOL success,id obj))complete{
     
     [self.dbQueue inDatabase:^(FMDatabase *db) {
-        [db yh_excuteDatasWithModel:[YHWorkGroup new] userInfo:userInfo fuzzyUserInfo:fuzzyUserInfo option:^(NSMutableArray *models) {
+        [db yh_excuteDatasWithTable:nil model:[YHWorkGroup new] userInfo:userInfo fuzzyUserInfo:fuzzyUserInfo option:^(NSMutableArray *models) {
             complete(YES,models);
         }];
     }];
@@ -140,7 +140,7 @@
     __block NSMutableArray *maRet = [NSMutableArray new];
     for (YHWorkGroup *model in dynList) {
         [self.dbQueue inDatabase:^(FMDatabase *db) {
-            [db yh_excuteDataWithModel:model userInfo:nil fuzzyUserInfo:nil option:^(id output_model) {
+            [db yh_excuteDataWithTable:nil model:model userInfo:nil fuzzyUserInfo:nil option:^(id output_model) {
                 if (output_model) {
                     [maRet addObject:output_model];
                 }
@@ -154,7 +154,7 @@
 //查询一条动态
 - (void)queryaDyn:(YHWorkGroup *)aDyn userInfo:(NSDictionary *)userInfo complete:(void (^)(BOOL, id))complete{
     [self.dbQueue inDatabase:^(FMDatabase *db) {
-        [db yh_excuteDataWithModel:aDyn userInfo:userInfo fuzzyUserInfo:nil option:^(id output_model) {
+        [db yh_excuteDataWithTable:nil model:aDyn userInfo:userInfo fuzzyUserInfo:nil option:^(id output_model) {
             complete(YES,output_model);
         }];
         
@@ -166,7 +166,7 @@
    
     for (YHWorkGroup *model in dynList) {
        [self.dbQueue inDatabase:^(FMDatabase *db) {
-            [db yh_deleteDataWithModel:model userInfo:nil option:^(BOOL del) {
+            [db yh_deleteDataWithTable:nil model:model userInfo:nil option:^(BOOL del) {
             }];
         }];
     }
@@ -189,7 +189,7 @@
 - (void)deleteDyn:(YHWorkGroup *)dyn userInfo:(NSDictionary *)userInfo complete:(void(^)(BOOL success,id obj))complete{
 
     [self.dbQueue inDatabase:^(FMDatabase *db) {
-        [db yh_deleteDataWithModel:dyn userInfo:userInfo option:^(BOOL del) {
+        [db yh_deleteDataWithTable:nil model:dyn userInfo:userInfo option:^(BOOL del) {
             complete(del,@(del));
         }];
     }];
@@ -218,7 +218,7 @@
         
         [self.dbQueue inDatabase:^(FMDatabase *db) {
             /** 存储:会自动调用insert或者update，不需要担心重复插入数据 */
-            [db yh_saveDataWithModel:model userInfo:nil option:^(BOOL save) {
+            [db yh_saveDataWithTable:nil model:model userInfo:nil option:^(BOOL save) {
                 complete(save,nil);
             }];
             
@@ -235,7 +235,7 @@
 //更新一个好友信息
 - (void)updateaFri:(YHUserInfo *)aFri userInfo:(NSDictionary *)userInfo complete:(void (^)(BOOL success,id obj))complete{
     [self.dbQueue inDatabase:^(FMDatabase *db) {
-       [db yh_saveDataWithModel:aFri userInfo:userInfo option:^(BOOL save) {
+       [db yh_saveDataWithTable:nil model:aFri userInfo:userInfo option:^(BOOL save) {
            complete(save,nil);
        }];
     }];
@@ -247,7 +247,7 @@
     __block NSMutableArray *maRet = [NSMutableArray arrayWithCapacity:frisList.count];
     for (YHUserInfo *model in frisList) {
         [self.dbQueue inDatabase:^(FMDatabase *db) {
-            [db yh_excuteDataWithModel:model userInfo:userInfo fuzzyUserInfo:nil option:^(id output_model) {
+            [db yh_excuteDataWithTable:nil model:model userInfo:userInfo fuzzyUserInfo:nil option:^(id output_model) {
                 if (output_model) {
                     [maRet addObject:output_model];
                 }
@@ -261,7 +261,7 @@
 //查询一个好友信息
 - (void)queryaFri:(YHUserInfo *)aFri userInfo:(NSDictionary *)userInfo complete:(void (^)(BOOL, id))complete{
     [self.dbQueue inDatabase:^(FMDatabase *db) {
-        [db yh_excuteDataWithModel:aFri userInfo:userInfo fuzzyUserInfo:nil option:^(id output_model) {
+        [db yh_excuteDataWithTable:nil model:aFri userInfo:userInfo fuzzyUserInfo:nil option:^(id output_model) {
             complete(YES,output_model);
         }];
     }];
@@ -271,7 +271,7 @@
 //查询我的好友表
 - (void)queryMyFrisTableWithUserInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo complete:(void (^)(BOOL success,id obj))complete{
     [self.dbQueue inDatabase:^(FMDatabase *db) {
-        [db yh_excuteDatasWithModel:[YHUserInfo new] userInfo:userInfo fuzzyUserInfo:fuzzyUserInfo option:^(NSMutableArray *models) {
+        [db yh_excuteDatasWithTable:nil model:[YHUserInfo new] userInfo:userInfo fuzzyUserInfo:fuzzyUserInfo option:^(NSMutableArray *models) {
             complete(YES,models);
         }];
     }];

@@ -44,6 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC47E8541E54221A004BF457 /* YHSqilteConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHSqilteConfig.h; sourceTree = "<group>"; };
 		AC8DA5501DD457B800F6AAEB /* TestData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestData.h; sourceTree = "<group>"; };
 		AC8DA5511DD457B800F6AAEB /* TestData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestData.m; sourceTree = "<group>"; };
 		AC9243171DD0532700F4A7CB /* YHFMDBDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YHFMDBDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,10 +155,11 @@
 				AC9243261DD0532700F4A7CB /* Assets.xcassets */,
 				AC9243281DD0532700F4A7CB /* LaunchScreen.storyboard */,
 				AC92432B1DD0532700F4A7CB /* Info.plist */,
+				AC47E8541E54221A004BF457 /* YHSqilteConfig.h */,
 				AC9243571DD0537F00F4A7CB /* SqliteManager.h */,
 				AC9243581DD0537F00F4A7CB /* SqliteManager.m */,
 				AC92439E1DD0819B00F4A7CB /* YHFMDBDemo.pch */,
-				AC92435E1DD0548A00F4A7CB /* thirdParty */,
+				AC92435E1DD0548A00F4A7CB /* Vendors */,
 				AC92435D1DD0547200F4A7CB /* YHFMDB */,
 				AC92433E1DD0534D00F4A7CB /* Model */,
 				AC92431A1DD0532700F4A7CB /* Supporting Files */,
@@ -211,13 +213,13 @@
 			path = YHFMDB;
 			sourceTree = "<group>";
 		};
-		AC92435E1DD0548A00F4A7CB /* thirdParty */ = {
+		AC92435E1DD0548A00F4A7CB /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
 				AC92437B1DD05B7800F4A7CB /* MJExtension */,
 				AC92435F1DD054A200F4A7CB /* fmdb */,
 			);
-			path = thirdParty;
+			path = Vendors;
 			sourceTree = "<group>";
 		};
 		AC92435F1DD054A200F4A7CB /* fmdb */ = {

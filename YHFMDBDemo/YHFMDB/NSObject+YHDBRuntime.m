@@ -19,6 +19,8 @@ NSString *const YHDB_AppendingID = @"_id";
 
 NSString *const YHDB_PrimaryKey = @"id";
 
+NSString *const YHDB_AutoIncreaseID = @"AutoIncreaseID";
+
 /**
  * 实现该方法，则必须实现：yh_replacedKeyFromPropertyName
  * 设置主键:能够唯一标示该模型的属性
@@ -88,7 +90,6 @@ NSString *const YHDB_PrimaryKey = @"id";
     return nil;
 }
 
-
 + (void)yh_objectIvar_nameAndIvar_typeWithOption:(RuntimeObjectIvarsOption )option{
     unsigned int count = 0;
     Ivar *ivars = class_copyIvarList(self, &count);
@@ -118,8 +119,19 @@ NSString *const YHDB_PrimaryKey = @"id";
 + (NSString *)yh_sqlForCreateTable:(NSString *)table primaryKey:(NSString *)primaryKey  extraKeyValues:(NSArray <YHDBRuntimeIvar *> *)extraKeyValues{
     
     __block NSString *initSql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (",table];
+    initSql = [initSql stringByAppendingString:[NSString stringWithFormat:@"%@ INTEGER PRIMARY KEY AUTOINCREMENT,",YHDB_AutoIncreaseID]];
+    NSArray *arrProDonotSave = [[self class] yh_propertyDonotSave];
+    
     [self yh_objectIvar_nameAndIvar_typeWithOption:^(YHDBRuntimeIvar *ivar) {
         [self yh_replaceKeyWithIvarModel:ivar option:^(YHDBRuntimeIvar *ivar) {
+            
+            for (NSString *proNameDonotSave in arrProDonotSave) {
+                if([proNameDonotSave isEqualToString:ivar.name]){
+                    
+                    return;
+                }
+            }
+            
             initSql = [initSql stringByAppendingString:[self yh_sqlWithExtraKeyValue:@[ivar] primaryKey:primaryKey]];
         }];
         
@@ -141,8 +153,10 @@ NSString *const YHDB_PrimaryKey = @"id";
 + (NSString *)yh_sqlForCreateTableWithPrimaryKey:(NSString *)primaryKey  extraKeyValues:(NSArray <YHDBRuntimeIvar *> *)extraKeyValues{
     
     __block NSString *initSql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (",NSStringFromClass([self class])];
+    
     [self yh_objectIvar_nameAndIvar_typeWithOption:^(YHDBRuntimeIvar *ivar) {
         [self yh_replaceKeyWithIvarModel:ivar option:^(YHDBRuntimeIvar *ivar) {
+            
             initSql = [initSql stringByAppendingString:[self yh_sqlWithExtraKeyValue:@[ivar] primaryKey:primaryKey]];
         }];
         
@@ -183,7 +197,7 @@ NSString *const YHDB_PrimaryKey = @"id";
 }
 
 //查询语句
-+ (NSString *)yh_sqlForExcuteWithTable:(NSString *)table primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo value:(id )value{
++ (NSString *)yh_sqlForExcuteWithTable:(NSString *)table primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo otherSQL:(NSDictionary *)otherSQL value:(id )value{
     
     NSString *tableName = nil;
     if (!table) {
@@ -195,9 +209,9 @@ NSString *const YHDB_PrimaryKey = @"id";
     NSString *sql  = @"";
     id priKeyValue = value;
     if (priKeyValue) {
-        sql = [NSString stringWithFormat:@"select * from %@ where %@ = %@",tableName,primaryKey,priKeyValue];
+        sql = [NSString stringWithFormat:@"select * from '%@' where %@ = '%@'",tableName,primaryKey,priKeyValue];
     }else{
-        sql = [NSString stringWithFormat:@"select * from %@ where",NSStringFromClass(self)];
+        sql = [NSString stringWithFormat:@"select * from '%@' where",NSStringFromClass(self)];
     }
     
     //拼接条件查询参数
@@ -311,6 +325,8 @@ NSString *const YHDB_PrimaryKey = @"id";
     }
 }
 
-
++ (NSArray *)yh_propertyDonotSave{
+    return nil;
+}
 
 @end

@@ -14,8 +14,8 @@
 
 typedef enum : NSUInteger
 {
-	updateFinish = 101,
-	updateFailure,
+    updateFinish = 101,
+    updateFailure,
 } UpdateStatus;
 
 //好友状态
@@ -38,7 +38,7 @@ typedef NS_ENUM(int,IdentityOption){
 };
 
 @interface YHUserInfo : NSObject {
-	BOOL _isRegister;
+    BOOL _isRegister;
 }
 
 @property (nonatomic, assign)   BOOL isSelfModel;   //用户Model是当前用户还是客人

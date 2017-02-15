@@ -42,7 +42,7 @@ extern const CGFloat kMarginContentRight;
     }
 }
 
-#pragma mark - 数据库操作
+#pragma mark - YHFMDB
 + (NSString *)yh_primaryKey{
     return @"dynamicId";
 }
@@ -60,6 +60,10 @@ extern const CGFloat kMarginContentRight;
 + (NSDictionary *)yh_getClassForKeyIsObject{
     return @{@"userInfo":[YHUserInfo class],
              @"forwardModel":[YHWorkGroup class]};
+}
+
++ (NSArray *)yh_propertyDonotSave{
+    return @[@"contentW",@"lastContentWidth",@"isOpening",@"shouldShowMoreButton",@"showDeleteButton",@"hiddenBotLine"];
 }
 
 @end

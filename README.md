@@ -53,16 +53,13 @@ copy调试台打印出来的数据库操作路径，点击前往文件夹：<br>
 * 变量声明: userInfo是条件查询内容,fuzzyUserInfo是模糊查询内容<br>
 * 条件查询<br>
 例如,现在我要查询 publishTime = 2016-10-5 的所有动态,可以这样设置:<br>
-<br>
 ``` 
 NSDictionary *userInfo = @{@"publishTime":@"2016-10-5"};
 [[SqliteManager sharedInstance] queryDynTableWithTag:_dynTag userID:_uid userInfo:userInfo fuzzyUserInfo:nil otherSQLDict:nil complete:^(BOOL success, id obj){
 	}];
 ```
-<br>
 * 全部查询 userInfo=nil ,fuzzyUserInfo = nil <br>
 例如,现在我要查询动态表所有动态，可以这样设置:<br>
-<br>
 ``` 
 [[SqliteManager sharedInstance] queryDynTableWithTag:_dynTag userID:_uid userInfo:nil fuzzyUserInfo:nil otherSQLDict:nil complete:^(BOOL success, id obj) {
       if (success) {
@@ -72,6 +69,5 @@ NSDictionary *userInfo = @{@"publishTime":@"2016-10-5"};
       }
  }];
 ```
-<br>
 
 

@@ -7,10 +7,12 @@ iOS-FMDB+runtime封装,简单实用,省去复杂的sql语句.<br>
 Mac工具：SqliteManager (数据库管理工具) <br>
 <br>
 ## 效果图
-<img src="https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic1.png?raw=true" width = "197" height = "118" alt="pic1"
-align=center /> <img src="https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic2.png?raw=true" width = "238" height = "24" alt="pic2"
-align=center /> <img src="https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic3.png?raw=true" width = "243" height = "187" alt="pic3" 
-align=center /> <br>
+<img src="https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic1.png?raw=true" width = "300" height = "200" alt="pic1"
+align=center /> <br> <br>
+<img src="https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic2.png?raw=true" width = "400" height = "50" alt="pic2"
+align=center /> <br> <br>
+<img src="https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic3.png?raw=true" width = "550" height = "380" alt="pic3" 
+align=center /> <br> <br>
 <img src="https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic4.png?raw=true" width = "320" height = "568" alt="pic4" 
 align=center />
 <br>

@@ -7,11 +7,11 @@ iOS-FMDB+runtime封装,简单实用,省去复杂的sql语句.<br>
 Mac工具：SqliteManager (数据库管理工具) <br>
 <br>
 ## 效果图
-<img src="https://github.com/samuelandkevin/PackaingFMDB" width = "197" height = "118" alt="pic1"
-align=center /> <img src="https://github.com/samuelandkevin/PackaingFMDB" width = "238" height = "24" alt="pic2"
-align=center /> <img src="https://github.com/samuelandkevin/PackaingFMDB" width = "243" height = "187" alt="pic3" 
+<img src="https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic1.png?raw=true" width = "197" height = "118" alt="pic1"
+align=center /> <img src="https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic2.png?raw=true" width = "238" height = "24" alt="pic2"
+align=center /> <img src="https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic3.png?raw=true" width = "243" height = "187" alt="pic3" 
 align=center /> <br>
-<img src="https://github.com/samuelandkevin/PackaingFMDB" width = "320" height = "568" alt="pic4" 
+<img src="https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic4.png?raw=true" width = "320" height = "568" alt="pic4" 
 align=center />
 <br>
 copy调试台打印出来的数据库操作路径，点击前往文件夹：<br>
@@ -32,7 +32,6 @@ copy调试台打印出来的数据库操作路径，点击前往文件夹：<br>
 <br>
 
 ## 怎么使用
-<br>
 
 ### 更新
 更新动态Id为"2016","2017","20165044","20167044"的动态<br>
@@ -49,14 +48,13 @@ copy调试台打印出来的数据库操作路径，点击前往文件夹：<br>
         [self _showResultWithTitle:@"查询动态结果" obj:obj];
     }];
 ```
-<br>
-<br>
-### 查询
+
+### 查询 <br>
 * 变量声明: userInfo是条件查询内容,fuzzyUserInfo是模糊查询内容<br>
 * 条件查询<br>
 例如,现在我要查询 publishTime = 2016-10-5 的所有动态,可以这样设置:<br>
 <br>
-``` Objective-c
+``` 
 NSDictionary *userInfo = @{@"publishTime":@"2016-10-5"};
 [[SqliteManager sharedInstance] queryDynTableWithTag:_dynTag userID:_uid userInfo:userInfo fuzzyUserInfo:nil otherSQLDict:nil complete:^(BOOL success, id obj){
 	}];

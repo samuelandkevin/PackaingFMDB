@@ -159,13 +159,18 @@ NSDictionary *userInfo = @{@"publishTime":@"2016-10-5"};
         APP应用到数据库,难免会遇到应用升级（model属性发生改变，譬如增加字段），这时数据库版本也需要更新。YHFMDB已经内置了新增字段的处理。你可以按照以下步骤，模拟数据库版本升级，对比数据库表前后的差别。<br>
   Note:先运行版本一，后打开注释，运行版本二<br>
 
-![]([https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic5.png?raw=true](https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic5.png?raw=true))
-![]([https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic6.png?raw=true](https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic6.png?raw=true))
-![]([https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic7.png?raw=true](https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic7.png?raw=true))
+<img src="https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic5.png?raw=true" width = "300" height = "200" alt="pic1"
+align=center /> <br>
+<img src="https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic6.png?raw=true" width = "300" height = "200" alt="pic1"
+align=center /> <br>
+<img src="https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic7.png?raw=true" width = "300" height = "200" alt="pic1"
+align=center /> <br>
 
 结果：动态表有新增加的字段出现，addSomething1，addSomething2，addSomething3.</br>
 用户表也有新增加的字段出现，addSomething1，addSomething2，addSomething3.</br>
-![]([https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic8.png?raw=true](https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic8.png?raw=true))
+<img src="https://github.com/samuelandkevin/PackaingFMDB/blob/master/pics/pic8.png?raw=true" width = "300" height = "200" alt="pic1"
+align=center /> <br>
+
 
 ### 注意事项
 1.新建Model的字段不能与sql的保留字一样，譬如以下字段会产生语法错误：index,add...<br>

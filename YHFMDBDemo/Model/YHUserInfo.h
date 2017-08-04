@@ -1,9 +1,9 @@
 //
 //  YHUserInfo.h
-//  PikeWay
+//  samuelandkevin
 //
-//  Created by kun on 16/4/25.
-//  Copyright © 2016年 YHSoft. All rights reserved.
+//  Created by samuelandkevin on 16/4/25.
+//  Copyright © 2016年 samuelandkevin. All rights reserved.
 //  当前用户Model
 
 #import <Foundation/Foundation.h>
@@ -41,6 +41,7 @@ typedef NS_ENUM(int,IdentityOption){
     BOOL _isRegister;
 }
 
+/********假设这是版本1.0添加的属性************/
 @property (nonatomic, assign)   BOOL isSelfModel;   //用户Model是当前用户还是客人
 @property (nonatomic, assign)   BOOL isRegister;    //是否已注册,判断是否是游客
 @property (nonatomic, assign) UpdateStatus updateStatus;
@@ -66,29 +67,37 @@ typedef NS_ENUM(int,IdentityOption){
 /**
  *  用户头像，用strong因为修改头像时要保存引用
  */
-@property (nonatomic, strong)   UIImage *avatarImage;
+@property (nonatomic, strong) UIImage *avatarImage;
 
-@property (nonatomic, assign)   short fromType;    //来自哪个平台
-@property (nonatomic, assign)   BOOL isOfficial;   //官方账号
-@property (nonatomic, assign)   int nNewFansCount; //新粉丝数量
-@property (nonatomic, assign)   int fansCount;     //粉丝数量
-@property (nonatomic, assign)   int followCount;   //关注的人数量
-@property (nonatomic, assign)   int likeCount;     //点赞数量
+@property (nonatomic, assign) short fromType;    //来自哪个平台
+@property (nonatomic, assign) BOOL isOfficial;   //官方账号
+@property (nonatomic, assign) int nNewFansCount; //新粉丝数量
+@property (nonatomic, assign) int fansCount;     //粉丝数量
+@property (nonatomic, assign) int followCount;   //关注的人数量
+@property (nonatomic, assign) int likeCount;     //点赞数量
 
 @property (nonatomic, assign) IdentityOption identity;              //身份类型
 @property (nonatomic, assign) FriendShipStatus friShipStatus;         //好友关系状态
 @property (nonatomic, assign) AddFriendStatus addFriStatus;          //添加好友的状态   (服务器返回：0 别人申请加我为好友 1 我申请加别人为好友  ->解析后 自定义101 别人申请加我为好友 102 我申请加别人为好友)
 
-@property (nonatomic, assign)   BOOL isFollowed;      //已经被关注
+@property (nonatomic, assign)  BOOL isFollowed;      //已经被关注
 
-@property (nonatomic, assign)   int photoCount;            //用户照片数量
+@property (nonatomic, assign)  int photoCount;            //用户照片数量
 @property (nonatomic, strong)  NSMutableArray *photoAlbum; //相册
 
-@property (nonatomic, strong) YHUserSetting *userSetting; //用户设置
+@property (nonatomic, strong)  YHUserSetting *userSetting; //用户设置
 
-@property (nonatomic, strong)     NSMutableArray *jobTags;                                             //职位标签
-@property (nonatomic, strong)     NSMutableArray <YHWorkExperienceModel *> *workExperiences;           //工作经历
-@property (nonatomic, strong)     NSMutableArray <YHEducationExperienceModel *> *eductaionExperiences; //教育经历
+@property (nonatomic, strong)  NSMutableArray *jobTags;                                             //职位标签
+@property (nonatomic, strong)  NSMutableArray <YHWorkExperienceModel *> *workExperiences;           //工作经历
+@property (nonatomic, strong)  NSMutableArray <YHEducationExperienceModel *> *eductaionExperiences; //教育经历
 
+/*  iOS数据库版本更新与迁移调试
+ *  Note:先运行版本1.0的程序.然后把操作一注释打开，运行程序一次
+ *
+ */
+/********操作一：假设这是版本2.0添加的属性************/
+//@property (nonatomic, copy) NSString *addSomething1;//新添加的字段：addSomething1
+//@property (nonatomic, copy) NSString *addSomething2;//新添加的字段：addSomething2
+//@property (nonatomic, copy) NSString *addSomething3;//新添加的字段：addSomething3
 
 @end

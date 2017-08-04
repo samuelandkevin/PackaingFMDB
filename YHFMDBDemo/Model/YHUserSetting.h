@@ -1,9 +1,9 @@
 //
 //  YHUserSetting.h
-//  PikeWay
+//  samuelandkevin
 //
-//  Created by kun on 16/5/2.
-//  Copyright © 2016年 YHSoft. All rights reserved.
+//  Created by samuelandkevin on 16/5/2.
+//  Copyright © 2016年 samuelandkevin. All rights reserved.
 //  用户隐私设置
 
 #import <Foundation/Foundation.h>
@@ -16,9 +16,9 @@ typedef NS_ENUM(NSInteger,Person){
 
 @interface YHUserSetting : NSObject
 
-@property (nonatomic, assign)Person    whoCanReadMyInfo;//谁可以查看我的资料
-@property (nonatomic, assign)Person    whoCanAddMetoFriend;        //谁可以把我添加为好友
-@property (nonatomic, copy)NSArray *   whoCannotReadMyDynamic;     //不让他看我的动态
-@property (nonatomic, copy)NSArray *    whoseDynamicIdonotRead;      //不看他的动态
+@property (nonatomic, assign)Person  whoCanReadMyInfo;         //谁可以查看我的资料
+@property (nonatomic, assign)Person  whoCanAddMetoFriend;      //谁可以把我添加为好友
+@property (nonatomic, copy)  NSArray *whoCannotReadMyDynamic;  //不让他看我的动态
+@property (nonatomic, copy)  NSArray *whoseDynamicIdonotRead;  //不看他的动态
 
 @end

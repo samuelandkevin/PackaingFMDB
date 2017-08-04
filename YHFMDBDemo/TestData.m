@@ -2,8 +2,8 @@
 //  Data.m
 //  YHFMDBDemo
 //
-//  Created by YHIOS002 on 16/11/10.
-//  Copyright © 2016年 YHSoft. All rights reserved.
+//  Created by samuelandkevin on 16/11/10.
+//  Copyright © 2016年 samuelandkevin. All rights reserved.
 //
 
 #import "TestData.h"
@@ -32,6 +32,11 @@
         model.visible = 1;
         model.originalPicUrls = @[[NSURL URLWithString:@"1"],[NSURL URLWithString:@"1"],[NSURL URLWithString:@"1"],[NSURL URLWithString:@"1"]];
         model.thumbnailPicUrls = @[[NSURL URLWithString:@"11"],[NSURL URLWithString:@"11"],[NSURL URLWithString:@"11"],[NSURL URLWithString:@"11"]];
+        
+        //假设这是版本2.0添加的属性
+        [self addSomethingWithDyn:model index:i];
+        
+        
         [array addObject:model];
     }
     return array;
@@ -126,7 +131,26 @@
     
     userInfo.workExperiences = weArr;           //工作经历
     userInfo.eductaionExperiences = eeArr; //教育经历
+    
+    //假设这是版本2.0添加的属性
+    [self addSomethingWithUserInfo:userInfo index:i];
     return userInfo;
 }
+
+/*********假设这是版本2.0添加的属性**************/
++ (void)addSomethingWithUserInfo:(YHUserInfo *)userInfo index:(int)index{
+//    userInfo.addSomething1 = [NSString stringWithFormat:@"新添加的属性1,%d",index+arc4random()%40];
+//    userInfo.addSomething2 = [NSString stringWithFormat:@"新添加的属性2,%d",index+arc4random()%40];
+//    userInfo.addSomething3 = [NSString stringWithFormat:@"新添加的属性3,%d",index+arc4random()%40];
+}
+
+
++ (void)addSomethingWithDyn:(YHWorkGroup *)dyn index:(int)index{
+//    dyn.addSomething1 = [NSString stringWithFormat:@"新添加的属性1,%d",index+arc4random()%40];
+//    dyn.addSomething2 = [NSString stringWithFormat:@"新添加的属性2,%d",index+arc4random()%40];
+//    dyn.addSomething3 = [NSString stringWithFormat:@"新添加的属性3,%d",index+arc4random()%40];
+}
+/********************************************/
+
 
 @end

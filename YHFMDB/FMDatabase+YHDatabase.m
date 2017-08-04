@@ -1,15 +1,15 @@
 //
 //  FMDatabase+YHDatabase.m
+//  https://github.com/samuelandkevin/PackaingFMDB
 //
-//
-//  Created by YHIOS002 on 16/11/8.
-//  Copyright © 2016年 YHSoft. All rights reserved.
+//  Created by samuelandkevin on 16/11/8.
+//  Copyright © 2016年 samuelandkevin. All rights reserved.
 //
 
 #import "FMDatabase+YHDatabase.h"
 #import <UIKit/UIKit.h>
 #import "NSObject+YHDBRuntime.h"
-
+#import "MJExtension.h"
 
 
 @implementation FMDatabase (YHDatabase)
@@ -372,6 +372,38 @@
     initSql = [initSql substringToIndex:initSql.length -1];
     initSql = [initSql stringByAppendingString:sql2];
     BOOL  ok = [self executeUpdate:initSql];
+    if (!ok) {
+        
+       int errorCode = [self lastErrorCode];
+       if (errorCode == 1){
+           //no such column
+           NSString *errorMsg = [self lastErrorMessage];
+           NSUInteger length;
+           NSString  *newColumn;
+           if([errorMsg rangeOfString:@"no such column: "].location != NSNotFound){
+               length = [errorMsg rangeOfString:@"no such column: "].length;
+               if (errorMsg.length > length) {
+                   newColumn = [errorMsg substringFromIndex:length];
+               }
+              
+           }
+           
+           if (newColumn) {
+               NSString *newColumnType = [[model class] yh_propertyTypeInSqlWithName:newColumn primaryKey:primaryKey];
+               
+               NSString *alertSqlStr = [NSString stringWithFormat:@"ALTER TABLE %@ ADD %@ %@ DEFAULT NULL",table,newColumn,newColumnType];
+               BOOL alertSuccess = [self executeUpdate:alertSqlStr];
+               if(alertSuccess){
+                   NSLog(@"插入新字段:%@成功",newColumn);
+                   [self yh_updateDataWithTable:table model:model primaryKey:primaryKey otherSQL:otherSQL option:option];
+                   ok = alertSuccess;
+               }
+
+           }
+           
+       }
+       
+    }
     if (option) option(ok);
     
 }
@@ -506,7 +538,12 @@
                             if(obj){
                                 [arrM addObject:obj];
                             }
+                        }else if([destclass isSubclassOfClass:[NSURL class]] && [dict isKindOfClass:[NSString class]]){
+                            if (dict) {
+                                [arrM addObject:[NSURL URLWithString:(NSString *)dict]];
+                            }
                         }else{
+                            
                             if(dict){
                                 [arrM addObject:dict];
                             }
@@ -549,6 +586,21 @@
                         NSString *urlStr = [set stringForColumn:ivar.name];
                         NSURL *url = [NSURL URLWithString:urlStr];
                         [model setValue:url forKey:ivar.name];
+                    }else if([ivar.typeName isEqualToString:@"@\"NSMutableAttributedString\""]){
+                        NSString *strValue = [set stringForColumn:ivar.name];
+                        if ([strValue isEqualToString:@"(null)"]) {
+                            strValue = nil;
+                        }
+                        
+                        NSMutableAttributedString *mStr = [[NSMutableAttributedString alloc] initWithString:strValue];
+                        [model setValue:mStr forKey:ivar.name];
+                    }else if ([ivar.typeName isEqualToString:@"@\"NSAttributedString\""]){
+                        NSString *strValue = [set stringForColumn:ivar.name];
+                        if ([strValue isEqualToString:@"(null)"]) {
+                            strValue = nil;
+                        }
+                        NSAttributedString *aStr = [[NSAttributedString alloc] initWithString:strValue];
+                        [model setValue:aStr forKey:ivar.name];
                     }else if ([ivar.typeName isEqualToString:@"@\"NSArray\""]){
                         NSString *strArr = [set stringForColumn:ivar.name];
                         NSUInteger count = [[strArr substringToIndex:1] integerValue];
@@ -568,6 +620,8 @@
                                     
                                     NSURL *url = [NSURL URLWithString:aStr];
                                     [array addObject:url];
+                                }else if ([aStr isEqualToString:@""]){
+                                    [array addObject:[NSURL URLWithString:aStr]];
                                 }else{
                                     [array addObject:aStr];
                                 }
@@ -575,7 +629,11 @@
                             
                         }
                         [model setValue:array forKey:ivar.name];
-                    }else{
+                    }else if([ivar.typeName isEqualToString:@"@\"NSData\""]){
+                        NSData *data =  [set dataForColumn:ivar.name];
+                        [model setValue:data forKey:ivar.name];
+                    }
+                    else{
                         
                         NSString *strValue = [set stringForColumn:ivar.name];
                         if ([strValue isEqualToString:@"(null)"]) {

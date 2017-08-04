@@ -1,14 +1,15 @@
 //
 //  YHEducationExperienceModel.h
-//  PikeWay
+//  samuelandkevin
 //
-//  Created by YHIOS003 on 16/5/17.
-//  Copyright © 2016年 YHSoft. All rights reserved.
+//  Created by samuelandkevin on 16/5/17.
+//  Copyright © 2016年 samuelandkevin. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 @interface YHEducationExperienceModel : NSObject
+
 @property(nonatomic,copy)   NSString * eduExpId;
 @property(nonatomic,strong) NSString * school;
 @property(nonatomic,strong) NSString * major;
@@ -17,6 +18,4 @@
 @property(nonatomic,strong) NSString * endTime;
 @property(nonatomic,strong) NSString * moreDescription;
 
-
-- (void)checkPropertyExistComplete:(void(^)(BOOL isOk,id Obj))complete;
 @end

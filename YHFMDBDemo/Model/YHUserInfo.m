@@ -1,16 +1,15 @@
 //
 //  YHUserInfo.m
-//  PikeWay
+//  samuelandkevin
 //
-//  Created by kun on 16/4/25.
-//  Copyright © 2016年 YHSoft. All rights reserved.
+//  Created by samuelandkevin on 16/4/25.
+//  Copyright © 2016年 samuelandkevin. All rights reserved.
 //
 
 #import "YHUserInfo.h"
 #import <UIKit/UIKit.h>
 
 @implementation YHUserInfo
-
 
 #pragma mark - YHFMDB
 + (NSString *)yh_primaryKey{
@@ -30,14 +29,14 @@
 }
 
 + (NSDictionary *)yh_replacedKeyFromDictionaryWhenPropertyIsObject{
-    return @{@"userSetting":[NSString stringWithFormat:@"userSetting%@",YHDB_AppendingID],
-             
+    return @{@"userSetting":[NSString stringWithFormat:@"userSetting%@",YHDB_AppendingID]
              };
 }
 
 #pragma mark - Life
 
 - (void)dealloc {
+    
 }
 
 @end

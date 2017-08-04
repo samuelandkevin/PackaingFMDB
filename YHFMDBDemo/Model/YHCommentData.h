@@ -1,9 +1,9 @@
 //
 //  YHCommentData.h
-//  PikeWay
+//  samuelandkevin
 //
-//  Created by kun on 16/5/15.
-//  Copyright © 2016年 YHSoft. All rights reserved.
+//  Created by samuelandkevin on 16/5/15.
+//  Copyright © 2016年 samuelandkevin. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

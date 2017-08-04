@@ -1,14 +1,13 @@
 //
 //  YHWorkGroup.m
-//  PikeWay
+//  samuelandkevin
 //
-//  Created by YHIOS002 on 16/5/5.
-//  Copyright © 2016年 YHSoft. All rights reserved.
+//  Created by samuelandkevin on 16/5/5.
+//  Copyright © 2016年 samuelandkevin. All rights reserved.
 //
 
 #import "YHWorkGroup.h"
 #import <UIKit/UIKit.h>
-
 
 extern const CGFloat contentLabelFontSize;
 extern CGFloat maxContentLabelHeight;
@@ -16,25 +15,18 @@ extern CGFloat maxContentRepostLabelHeight;
 extern const CGFloat kMarginContentLeft;
 extern const CGFloat kMarginContentRight;
 
-@implementation YHWorkGroup
-{
+@implementation YHWorkGroup{
     CGFloat _lastContentWidth;
 }
 
-
-//YHSERIALIZE_DESCRIPTION();
-
 @synthesize msgContent = _msgContent;
 
-- (void)setMsgContent:(NSString *)msgContent
-{
+- (void)setMsgContent:(NSString *)msgContent{
     _msgContent = msgContent;
 }
 
 
-
-- (void)setIsOpening:(BOOL)isOpening
-{
+- (void)setIsOpening:(BOOL)isOpening{
     if (!_shouldShowMoreButton) {
         _isOpening = NO;
     } else {
@@ -43,6 +35,7 @@ extern const CGFloat kMarginContentRight;
 }
 
 #pragma mark - YHFMDB
+
 + (NSString *)yh_primaryKey{
     return @"dynamicId";
 }
@@ -60,6 +53,13 @@ extern const CGFloat kMarginContentRight;
 + (NSDictionary *)yh_getClassForKeyIsObject{
     return @{@"userInfo":[YHUserInfo class],
              @"forwardModel":[YHWorkGroup class]};
+}
+
++ (NSDictionary *)yh_propertyIsInstanceOfArray{
+    return @{
+             @"originalPicUrls":[NSURL class],
+             @"thumbnailPicUrls":[NSURL class]
+             };
 }
 
 + (NSArray *)yh_propertyDonotSave{

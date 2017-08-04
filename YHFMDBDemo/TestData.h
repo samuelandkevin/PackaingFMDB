@@ -2,8 +2,8 @@
 //  Data.h
 //  YHFMDBDemo
 //
-//  Created by YHIOS002 on 16/11/10.
-//  Copyright © 2016年 YHSoft. All rights reserved.
+//  Created by samuelandkevin on 16/11/10.
+//  Copyright © 2016年 samuelandkevin. All rights reserved.
 //  测试数据模型
 
 #import <Foundation/Foundation.h>

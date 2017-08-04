@@ -2,8 +2,8 @@
 //  YHFMDBDemo.pch
 //  YHFMDBDemo
 //
-//  Created by YHIOS002 on 16/11/7.
-//  Copyright © 2016年 YHSoft. All rights reserved.
+//  Created by samuelandkevin on 16/11/7.
+//  Copyright © 2016年 samuelandkevin. All rights reserved.
 //
 
 #ifndef YHFMDBDemo_pch
@@ -11,6 +11,7 @@
 
 #import "FMDatabase+YHDatabase.h"
 #import "NSObject+YHDBRuntime.h"
+
 #define WeakSelf  __weak __typeof(&*self)weakSelf = self;
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.

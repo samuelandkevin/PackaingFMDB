@@ -1,9 +1,9 @@
 //
 //  NSObject+Runtime.m
+//  https://github.com/samuelandkevin/PackaingFMDB
 //
-//
-//  Created by YHIOS002 on 16/11/9.
-//  Copyright © 2016年 YHSoft. All rights reserved.
+//  Created by samuelandkevin on 16/11/9.
+//  Copyright © 2016年 samuelandkevin. All rights reserved.
 //
 
 #import "NSObject+YHDBRuntime.h"
@@ -194,6 +194,57 @@ NSString *const YHDB_AutoIncreaseID = @"AutoIncreaseID";
         }
     }
     return initSql;
+}
+
+//某个Model的属性类型对应sql中的类型
++ (NSString *)yh_propertyTypeInSqlWithName:(NSString *)propertyName primaryKey:(NSString *)primaryKey{
+    
+    NSString *propertyType = nil;
+    YHDBRuntimeIvar *targeetModel = nil;
+    unsigned int count = 0;
+    Ivar *ivars = class_copyIvarList(self, &count);
+    for (int i =0; i < count; i++) {
+        Ivar ivar = ivars[i];
+        /** 成员变量名 */
+        NSString *key = [NSString stringWithUTF8String:ivar_getName(ivar)];
+        const char *type = ivar_getTypeEncoding(ivar);
+        NSInteger ivar_type = (NSInteger ) type[0];
+        NSString *ivar_name = [key substringFromIndex:1];
+       
+        if ([ivar_name isEqualToString:propertyName]) {
+            targeetModel = [YHDBRuntimeIvar new];
+            targeetModel.name = ivar_name;
+            targeetModel.type = ivar_type;
+            targeetModel.typeName = [NSString stringWithCString:type encoding:NSUTF8StringEncoding];
+            
+            break;
+        }
+    }
+    free(ivars);
+    
+    if (targeetModel) {
+        NSString *ivar_name = targeetModel.name;
+        NSInteger ivar_type = targeetModel.type;
+        if (ivar_type == RuntimeObjectIvarTypeDoubleAndFloat) {
+            propertyType = @"double";
+        }else if(ivar_type == RuntimeObjectIvarTypeObject){
+            propertyType = @"text";
+        }else if (ivar_type == RuntimeObjectIvarTypeArray){
+            propertyType = @"text";
+        }else if (ivar_type == RuntimeObjectIvarTypeData){
+            propertyType = @"text";
+        }else if (ivar_type == RuntimeObjectIvarTypeImage){
+            propertyType = @"text";
+        }else{
+            /** id */
+            if ([ivar_name isEqualToString:primaryKey] ) {
+                propertyType = @"integer(11)";
+            }else
+                propertyType = @"long";
+        }
+
+    }
+    return propertyType;
 }
 
 //查询语句

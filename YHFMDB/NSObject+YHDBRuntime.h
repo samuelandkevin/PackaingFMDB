@@ -1,14 +1,14 @@
 //
 //  NSObject+Runtime.h
+//  https://github.com/samuelandkevin/PackaingFMDB
 //
-//
-//  Created by YHIOS002 on 16/11/9.
-//  Copyright © 2016年 YHSoft. All rights reserved.
+//  Created by samuelandkevin on 16/11/9.
+//  Copyright © 2016年 samuelandkevin. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-#import "MJExtension.h"
+//#import "MJExtension.h"
 
 
 
@@ -124,6 +124,7 @@ typedef void(^RuntimeObjectIvarsOption)(YHDBRuntimeIvar *ivar);
 //创表三:
 + (NSString *)yh_sqlForCreateTable:(NSString *)table primaryKey:(NSString *)primaryKey  extraKeyValues:(NSArray <YHDBRuntimeIvar *> *)extraKeyValues;
 
++ (NSString *)yh_propertyTypeInSqlWithName:(NSString *)propertyName primaryKey:(NSString *)primaryKey;
 
 //条件查询语句
 + (NSString *)yh_sqlForExcuteWithTable:(NSString *)table primaryKey:(NSString *)primaryKey userInfo:(NSDictionary *)userInfo fuzzyUserInfo:(NSDictionary *)fuzzyUserInfo otherSQL:(NSDictionary *)otherSQL value:(id )value;

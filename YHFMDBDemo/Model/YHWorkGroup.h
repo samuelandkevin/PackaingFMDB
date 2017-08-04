@@ -1,9 +1,9 @@
 //
 //  YHWorkGroup.h
-//  PikeWay
+//  samuelandkevin
 //
-//  Created by YHIOS002 on 16/5/5.
-//  Copyright © 2016年 YHSoft. All rights reserved.
+//  Created by samuelandkevin on 16/5/5.
+//  Copyright © 2016年 samuelandkevin. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -47,6 +47,16 @@ typedef NS_ENUM(int,VisibleType){
 @property (nonatomic, assign) BOOL showDeleteButton;
 @property (nonatomic, assign) BOOL hiddenBotLine;//隐藏底部高度15的分隔线
 @property (nonatomic, assign) int  curReqPage;//记录当前请求页码
+
+
+/*  iOS数据库版本更新与迁移调试
+ *  Note:先运行版本1.0的程序.然后把操作一注释打开，运行程序一次
+ *
+ */
+/********操作一：假设这是版本2.0添加的属性************/
+//@property (nonatomic, copy) NSString *addSomething1;//新添加的字段：addSomething1
+//@property (nonatomic, copy) NSString *addSomething2;//新添加的字段：addSomething2
+//@property (nonatomic, copy) NSString *addSomething3;//新添加的字段：addSomething3
 @end
 
 
